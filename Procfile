@@ -1,1 +1,1 @@
-web: gunicorn rssreader.wsgi.application --log-file=-
+web: gunicorn rssreader.wsgi --log-file=-
