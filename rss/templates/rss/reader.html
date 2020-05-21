@@ -1,0 +1,81 @@
+{% extends 'rss/base.html' %}
+
+ 
+
+
+{% block body %}
+
+<br />
+
+<form class="form-inline">
+
+    <div class="form-group mx-sm-3 mb-2">
+
+        <input type="text" class="form-control" placeholder="vlož link" name="url" value='{{ url }}'>
+
+        <select name="sort" class="form-control">
+            <option value="1">Nezoradiť</option>
+            <option value="2">Od najnovších</option>
+            <option value="3">Od najstarších</option>
+        </select>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary mb-2">Hľadaj</button>
+
+</form>
+
+
+{% if feed %}
+
+<h2>{{ feed.feed.title }}</h2>
+
+{% if feed.entries %}
+
+{% for entry in feed.entries %}
+
+<div class="container card">
+
+    <div class="row">
+
+        <div class="col-sm-6">
+
+            <h5 class="card-title"> {{ entry.title }}</h5>
+
+            <p class="card-text"> {{ entry.description }}</p>
+
+            <p>{{ entry.published }}</p>
+            
+            <a href="{{ entry.link }}" class="btn btn-primary">Navštív odkaz</a>
+
+        </div>
+
+        <div class="col-sm-6">
+
+        {% for entry in entry.enclosures %}
+
+            <img src="{{ entry.href }}" class="img-fluid" alt="">
+
+        {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+{% else %}
+
+{% endif %}
+
+ 
+
+
+{{ feed2 }}
+
+ 
+
+
+{% endblock %}
